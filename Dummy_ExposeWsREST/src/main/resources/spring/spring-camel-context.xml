@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+         
+        <route id="_idFlujoCamelRoute" streamCache="true" > 
+        
+            <from id="_idInterfaceswebFrom" uri="{{ws.endpoint.service}}" />
+            
+            <doTry id="_idDoTry_01" >
+                <log id="_idLog_01" message="Request 'Servicio': \n ${body}" />
+                				 
+                <setHeader id="_idSetHeader_01" headerName="CamelHttpMethod" >
+                    <simple>{{ws.header.httpmethod}}</simple>
+                </setHeader>
+                
+                <setHeader id="_idSetHeader_02" headerName="Content-Type" >
+                    <simple>{{ws.header.contenttype}}</simple>
+                </setHeader>
+                             
+                <setBody id="_idBody_01" >   
+                   <simple>{{ws.body.response}}</simple> 
+                </setBody>         
+                             
+                                      
+                <log id="_idLog_02" message="Response 'Servicio': \n ${body}" />
+                
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_idLog_03" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+ 
+</beans>
+

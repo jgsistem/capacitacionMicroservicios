@@ -1,0 +1,12 @@
+{
+  "ConsultaPeliculaBodyResponse": {
+    "listaPelicula": [
+      {
+        "nombre": "?",
+        "tipo": "?",
+        "fechaCreacion": "?",
+        "autor": "?"
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:blac="http://visanet.com.pe/ws/oper/ent/BlacklistInqOper" 
+xmlns:par="http://visanet.com.pe/msg/PartyInqRq" 
+xmlns:com="http://visanet.com.pe/obj/Common" 
+xmlns:com1="http://visanet.com.pe/obj/CommonExt" 
+xmlns:par1="http://visanet.com.pe/obj/PartyExt" 
+xmlns:par2="http://visanet.com.pe/obj/Party" 
+xmlns:rec="http://visanet.com.pe/obj/RecurPmtExt" 
+xmlns:car="http://visanet.com.pe/obj/CardOrder" 
+xmlns:svc="http://visanet.com.pe/obj/Svc" 
+xmlns:deb="http://visanet.com.pe/obj/Debit" 
+xmlns:acct="http://visanet.com.pe/obj/Acct" 
+xmlns:acc="http://visanet.com.pe/obj/AcctTrn" 
+xmlns:cred="http://visanet.com.pe/obj/Credit" 
+xmlns:ter="http://visanet.com.pe/obj/TerminalObj" >
+
+   <soapenv:Header/>
+   <soapenv:Body>
+      <blac:BlacklistInqOperRq>
+         <par:PartyInqRq>
+            <par2:PartySel>
+               <par1:PartySel_Ext>
+                  <par2:OrgPartyInfo>
+                     <par2:OrgData>
+                        <par2:IssuedIdent>
+                           <par2:IssuedIdentValue>CESAR GUERRA</par2:IssuedIdentValue>
+                        </par2:IssuedIdent>
+                     </par2:OrgData>
+                  </par2:OrgPartyInfo>
+                  <par2:PersonPartyInfo>
+                     <par2:PersonData>
+                        <par2:IssuedIdent>
+                           <par2:IssuedIdentValue>41568781</par2:IssuedIdentValue>
+                        </par2:IssuedIdent>
+                        <par1:PersonData_Ext>
+                           <par2:PhoneNum>
+                              <Phone>235689</Phone>
+                           </par2:PhoneNum>
+                           <par2:PhoneNum>
+                              <Phone>956505000</Phone>
+                           </par2:PhoneNum>
+                           <com:Email>
+                              <par2:EmailAddr>email@email.com</par2:EmailAddr>
+                           </com:Email>
+                        </par1:PersonData_Ext>
+                     </par2:PersonData>
+                  </par2:PersonPartyInfo>
+               </par1:PartySel_Ext>
+            </par2:PartySel>
+         </par:PartyInqRq>
+      </blac:BlacklistInqOperRq>
+   </soapenv:Body>
+</soapenv:Envelope>

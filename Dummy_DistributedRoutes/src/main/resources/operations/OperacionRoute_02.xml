@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="     
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans.xsd        
+			http://camel.apache.org/schema/spring 
+			http://camel.apache.org/schema/spring/camel-spring.xsd" >
+	
+	<routeContext id="OperacionRoute_02RouteContext"
+		          xmlns="http://camel.apache.org/schema/spring" >
+		          
+		<route id="OperacionRoute_02Route" >
+			<from id="_OperacionRoute_02From" uri="direct:OperacionRoute_02" />
+			<log  id="_idlog_01B" message="------> DENTRO DE: 'OPERACION #2': \n ${body}" />
+		</route>
+		
+	</routeContext>
+	
+</beans>
+

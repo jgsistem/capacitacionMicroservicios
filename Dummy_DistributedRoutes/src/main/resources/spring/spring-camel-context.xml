@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <import resource="classpath:operations/OperacionRoute_01.xml" /> 
+    <import resource="classpath:operations/OperacionRoute_02.xml" /> 
+    
+    <camelContext id="_idFlujoCamelContext" 
+                  streamCache="true" 
+                  xmlns="http://camel.apache.org/schema/spring" >  
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" /> 
+        
+        <routeContextRef ref="OperacionRoute_01RouteContext" /> 
+        <routeContextRef ref="OperacionRoute_02RouteContext" /> 
+         
+         
+        <route id="_idFlujoCamelRoute" streamCache="true" > 
+            
+            <from id="_idFile_01" uri="{{ws.timer.component}}" />    
+             
+            <doTry id="_idDoTry_01" >
+                
+                <setBody id="_idBody_01" >
+                  <simple>{{ws.opcion.operacion}}</simple>
+                </setBody>
+                
+                <log id="_idLog_01" message="Request ==> \n [${body}]" /> 
+                
+                <choice id="_Choice_001" >
+                    <description>VALIDACION POR 'OPERACION'</description>
+                    <when id="_SI_001" >
+                        <xpath>/root/operacion/text() = '1'</xpath>
+                        
+                        <!-- REDIRECCIONANDO 'OPERACION #1' --> 
+		                <recipientList id="_idRecipientList_01" > 
+		                    <simple>direct:OperacionRoute_01</simple> 
+		                </recipientList>
+                    </when>
+                    <otherwise id="_SINO_001" >
+                          <log id="_idLog_01222" message="OPCION NO" /> 
+                          
+                          <!-- REDIRECCIONANDO 'OPERACION #2' -->
+ 		                  <recipientList id="_idRecipientList_01" > 
+		                      <simple>direct:OperacionRoute_02</simple> 
+		                  </recipientList>
+                    </otherwise>
+                </choice>
+    
+                <doCatch id="_idDoCatch_01" > 
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_idLog_02" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+ 
+    </camelContext>
+ 
+</beans>
+

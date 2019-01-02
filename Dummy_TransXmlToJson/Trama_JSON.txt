@@ -1,0 +1,12 @@
+{
+  "DatosClienteInput": {
+    "datosClienteRequest": {
+      "transaccionBean": {
+        "idTransacion": "EAI_001",
+        "codigo": "1",
+        "mensaje": "XX"
+      },
+      "numDni": "4444"
+    }
+  }
+}

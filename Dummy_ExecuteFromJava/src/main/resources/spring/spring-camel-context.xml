@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+ 
+        <route id="_idFlujoCamelRoute" > 
+ 
+                <from id="_Timer_001" uri="{{ws.input.component}}" /> 
+                <log id="_Log_001" message="ANTES... \n [${body}]" /> 
+                
+	            <doTry id="_idDoTry_01" > 
+	                
+	                <!-- DUMMY_01 -->
+					<process ref="_idDummyProcessor_01" /> 
+		 			        
+			        <log id="_Log_002" message="- Objeto ==> \n [${body}]" /> 
+			        <log id="_Log_003" message="- id ==> \n [${body.id}]" />
+			        <log id="_Log_004" message="- nombre ==> \n [${body.nombre}]" />    
+                    <log id="_Log_005" message="- departamento ==> \n [${body.departamento}]" />  
+                    
+                    <setBody id="_idBody_01" >
+                      <simple>${body.id} - ${body.nombre} - ${body.departamento}</simple>
+                    </setBody>                    
+                    
+                    <!-- DUMMY_02 --> 
+                    <process ref="_idDummyProcessor_02" />  
+                    <log id="_Log_006" message="- cadena ==> \n [${body}]" /> 
+                                         
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_Log_007" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+    
+    <bean id="_idDummyProcessor_01" class="pe.com.capacitacion.processor.DummyProcessor_01" />
+    <bean id="_idDummyProcessor_02" class="pe.com.capacitacion.processor.DummyProcessor_02" />
+    
+</beans>
+

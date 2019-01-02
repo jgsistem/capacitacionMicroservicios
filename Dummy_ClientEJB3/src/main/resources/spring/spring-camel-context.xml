@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/util" 
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd  
+					       http://www.springframework.org/schema/util 
+					       http://www.springframework.org/schema/util/spring-util.xsd" >
+    
+    <!-- 'Conexion EJB3' -->                            
+    <p:properties id="_idJNDIProperties" > 
+        <prop key="java.naming.factory.initial" >weblogic.jndi.WLInitialContextFactory</prop>
+        <prop key="java.naming.provider.url" >t3://localhost:7001</prop>
+         
+        <prop key="remote.connection.default.username" >weblogic</prop>
+        <prop key="remote.connection.default.password" >12345678</prop>        
+    </p:properties>
+
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+ 
+        <route id="_idFlujoCamelRoute" > 
+  
+                <!-- DUMMY_01 -->
+	            <from uri="{{ws.timer.component}}" />  
+	            
+	            <doTry id="_idDoTry_01" >  
+	            	                
+		            <setBody id="_idBody_01" > 
+		               <simple>CESAR RICARDO</simple>
+		            </setBody> 
+		            
+		            <log id="_idLog_01" message="[EJB, enviando 'REQUEST'] ==> \n ${body}" /> 
+		            
+		            <to uri="idEJBComponent:{{ws.weblogic.jndi.ejb3}}" />   
+		            <to uri="mock:result" /> 
+		                        
+		            <log id="_idLog_02" message="[EJB, enviando 'RESPONSE'] ==> \n ${body}" /> 
+                                         
+                <doCatch id="_idDoCatch_01" > 
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                       <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_Log_03" message="Exception: \n ${body}" />    
+                </doCatch> 
+            </doTry> 
+            
+        </route>        
+    </camelContext>
+    
+    
+    <!-- 'Camel EJB component' -->
+    <bean id="idEJBComponent" class="org.apache.camel.component.ejb.EjbComponent" > 
+        <property name="properties" ref="_idJNDIProperties" />
+    </bean>
+    
+</beans>
+

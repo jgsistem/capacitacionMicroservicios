@@ -1,0 +1,16 @@
+{
+    "personas": [
+		    {
+	        "nombres":  "CESAR RICARDO GUERRA ARNAIZ",
+	        "edad":     "36"
+		    }, 
+		    {
+	        "nombres":  "IVAN ARTURO FRANCISCO SILVA",
+	        "edad":     "40"
+		    }, 
+		    {
+	        "nombres":  "MARCO ANTONIO PEREZ MARTINEZ",
+	        "edad":     "30"
+		    }
+    ]
+}

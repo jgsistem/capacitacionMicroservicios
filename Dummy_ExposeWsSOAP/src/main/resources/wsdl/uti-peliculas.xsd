@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+ 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	          xmlns:tns="http://capacitacion.com.pe/ws/soap/util/peliculas/types"
+	          targetNamespace="http://capacitacion.com.pe/ws/soap/util/peliculas/types"
+	          elementFormDefault="qualified" >
+ 
+    <xsd:element name="ConsultaPeliculaBodyRequest"  > 		
+				<xsd:complexType>
+					 <xsd:sequence>  
+		            <xsd:element type="xsd:string" name="idPelicula" />   
+					 </xsd:sequence>
+				</xsd:complexType>
+    </xsd:element>
+ 
+    <xsd:element name="ConsultaPeliculaBodyResponse" >
+				<xsd:complexType>
+					 <xsd:sequence>  
+		            <xsd:element name="listaPelicula" type="tns:registroPelicula" minOccurs="1" maxOccurs="unbounded" />   
+					 </xsd:sequence>
+				</xsd:complexType>
+    </xsd:element>	
+ 
+    <xsd:complexType name="registroPelicula" > 
+	    <xsd:sequence>  
+           <xsd:element type="xsd:string"  name="nombre" />
+           <xsd:element type="xsd:string"  name="tipo"   />	
+           <xsd:element type="xsd:string"  name="fechaCreacion" />   
+           <xsd:element type="xsd:string"  name="autor"  />        
+	    </xsd:sequence>
+    </xsd:complexType>   
+    
+</xsd:schema>
+

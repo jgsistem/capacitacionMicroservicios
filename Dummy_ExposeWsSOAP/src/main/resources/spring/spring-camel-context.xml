@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+					       http://www.springframework.org/schema/beans/spring-beans.xsd        
+					       http://camel.apache.org/schema/spring       
+					       http://camel.apache.org/schema/spring/camel-spring.xsd       
+					       http://camel.apache.org/schema/cxf       
+					       http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <!-- *********** [ENDPOINTs] *********** -->
+    <cxf:cxfEndpoint id="DummyExposeWsSOAP11"
+                     address="/ws/DummyExposeWsSOAP11"
+			         endpointName="tns:ConsultaPeliculaPortSOAP11"			          
+			         serviceName="tns:ConsultaPeliculaService"
+			         wsdlURL="wsdl/uti-peliculas.wsdl" 
+			         xmlns:tns="http://capacitacion.com.pe/ws/soap/util/peliculas" > 
+         <cxf:properties>
+              <entry key="dataFormat"              value="PAYLOAD" />
+              <entry key="source-preferred-format" value="dom"     />
+         </cxf:properties>
+    </cxf:cxfEndpoint>
+ 
+    <cxf:cxfEndpoint id="DummyExposeWsSOAP12"
+                     address="/ws/DummyExposeWsSOAP12"
+			         endpointName="tns:ConsultaPeliculaPortSOAP12"			          
+			         serviceName="tns:ConsultaPeliculaService"
+			         wsdlURL="wsdl/uti-peliculas.wsdl" 
+			         xmlns:tns="http://capacitacion.com.pe/ws/soap/util/peliculas" > 
+         <cxf:properties>
+              <entry key="dataFormat"              value="PAYLOAD" /> 
+              <entry key="source-preferred-format" value="dom"     /> 
+         </cxf:properties>
+    </cxf:cxfEndpoint> 
+    
+    
+    <!-- *********** [ENDPOINTs] *********** --> 
+    <camelContext id="_idFlujoCamelContext" 
+                  streamCache="true" 
+                  xmlns="http://camel.apache.org/schema/spring" 
+                  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+ 
+        <route id="_idDummy_ExposeWsSOAP11Route" >            
+            <from id="_idDummy_ExposeWsSOAP11From" uri="cxf:bean:DummyExposeWsSOAP11" />            
+            <log id="_idLog_01A" message="******************** 'REQUEST' - [Dummy_TemplateSOAP] - 'OPERACION:' [${header.operationName}] ******************** \n  ${body}" />
+ 
+            <doTry id="_idDoTry_01" >
+	            <recipientList id="_RedirectRecipientListSOAP11" >
+	                 <simple>direct:${header.operationName}</simple>
+	            </recipientList>
+	            <doCatch id="_idDoCatch_01" > 
+                     <exception>java.lang.Exception</exception> 
+                     <log id="_idLog_02A" message="Exception: \n ${body}" /> 
+                </doCatch> 
+            </doTry>            
+        </route>
+         
+        <route id="_idDummy_ExposeWsSOAP12Route" >
+            <from id="_idDummy_ExposeWsSOAP12From" uri="cxf:bean:DummyExposeWsSOAP12" />
+            <log id="_idLog_01B" message="******************** 'REQUEST' - [Dummy_TemplateSOAP] - 'OPERACION:' [${header.operationName}] ******************** \n  ${body}" />  
+
+            <doTry id="_idDoTry_02" >
+	            <recipientList id="_RedirectRecipientListSOAP12" >
+	                 <simple>direct:${header.operationName}</simple>
+	            </recipientList>
+	            <doCatch id="_idDoCatch_02" > 
+                     <exception>java.lang.Exception</exception> 
+                     <log id="_idLog_02B" message="Exception: \n ${body}" /> 
+                </doCatch> 
+            </doTry>   
+        </route> 
+           
+        
+        <!-- *********** [OPERACIONES] *********** -->  
+        <route id="_idFlujoCamelRoute" >
+            <from id="_idConsultaPeliculaFrom" uri="direct:consultaPelicula" />
+             
+            <log id="_idLog_03" message="------ 'REQUEST' - [consultaPelicula] ------ \n  ${body}" />
+           
+            <setHeader id="_idSetHeader_01" headerName="Content-Type" >
+                <constant>{{ws.header.contenttype}}</constant>
+            </setHeader>
+  
+            <setBody id="_idBody_01" >
+                <simple>{{ws.body.response}}</simple>
+            </setBody>
+
+            <log id="_idLog_04" message="------ 'RESPONSE' - [consultaPelicula] ------ \n  ${body}" />
+        </route>
+        
+    </camelContext>
+ 
+</beans>
+

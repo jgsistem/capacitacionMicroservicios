@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+ 
+        <route id="_idFlujoCamelRoute" > 
+ 
+                <from id="_Timer_001" uri="{{ws.timer.component}}" /> 
+                <log id="_Log_001" message="ANTES... \n ${body}" /> 
+                
+	            <doTry id="_idDoTry_01" > 
+	                
+			  	    <setProperty propertyName="variable_001" >
+			            <constant>camel</constant>
+			        </setProperty>
+		
+			  	    <setProperty propertyName="variable_002" >
+			            <constant>es un framework</constant>
+			        </setProperty>
+		
+			  	    <setProperty propertyName="variable_003" >
+			            <constant>muy poderoso !!!</constant>
+			        </setProperty>	  
+			        
+			        <setBody>
+			            <simple>${property.variable_001} ${property.variable_002} ${property.variable_003}</simple>
+			        </setBody>
+			        
+			        <log id="_Log_002"  message="Enviando a 'JAVASCRIPT' ==>: \n [${body}]" /> 
+			        
+			        <to uri="language://javascript:classpath:js/algoritmo.js?transform=false" />
+			        <to uri="log:javascript?showAll=true" />        
+			        
+			        <log id="_Log_003" message="IMPRIMIENDO (Camel-Context) ==>  \n ${body}" /> 
+			           
+                     
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_Log_004" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+ 
+</beans>
+

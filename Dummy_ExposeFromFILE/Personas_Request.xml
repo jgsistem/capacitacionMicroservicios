@@ -1,0 +1,16 @@
+<root> 
+	<personas>
+		<nombres>CESAR RICARDO GUERRA ARNAIZ</nombres>
+		<edad>36</edad>
+	</personas>
+	
+	<personas>
+		<nombres>IVAN ARTURO FRANCISCO SILVA</nombres>
+		<edad>40</edad>
+	</personas>
+	
+	<personas>
+		<nombres>MARCO ANTONIO PEREZ MARTINEZ</nombres>
+		<edad>30</edad>
+	</personas>	
+</root>
