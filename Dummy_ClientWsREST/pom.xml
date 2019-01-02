@@ -5,20 +5,20 @@
 	     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" >
 		     
 		<modelVersion>4.0.0</modelVersion>
-		<groupId>xxx</groupId>
+		<groupId>pe.com.capacitacion</groupId>
 		<artifactId>Dummy_ClientWsREST</artifactId>
 		<version>1.0.0</version>
 		<name>Dummy_ClientWsREST</name>
 		<description>Dummy_ClientWsREST</description>
-	
-	
+		
 		<properties>
 			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 			<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+			<java.version>1.8</java.version>
+			
 			<spring.boot-version>1.5.4.RELEASE</spring.boot-version>
 			<fabric8.version>2.2.170</fabric8.version>
 			<xom.version>1.2.5</xom.version>
-			<java.version>1.8</java.version>
 		</properties>
 	
 		<parent>
@@ -40,77 +40,46 @@
 		</dependencyManagement>
 	
 		<dependencies>
-	
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-http4</artifactId>
-				<scope>provided</scope>
-			</dependency>
-	
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-undertow</artifactId>
-				<scope>provided</scope>
-			</dependency>
-	
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-cxf</artifactId>
-				<scope>provided</scope>
-			</dependency>
-	
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-spring-boot</artifactId>
-				<scope>provided</scope>
-			</dependency>
-	
+	        
+	        <!-- SPRING FRAMEWORK --> 
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter</artifactId>
+				<scope>provided</scope>
 			</dependency>
 	
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
-			</dependency>
-	
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-restlet</artifactId>
 				<scope>provided</scope>
 			</dependency>
-	
+ 	        
+										
+			<!-- APACHE CAMEL --> 
 			<dependency>
 				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-jsonpath</artifactId>
+				<artifactId>camel-spring-boot</artifactId>
 				<scope>provided</scope>
 			</dependency>
-	
+						 
 			<dependency>
 				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-jackson</artifactId>
+				<artifactId>camel-cxf</artifactId>
 				<scope>provided</scope>
 			</dependency>
-	
+	 
 			<dependency>
 				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-xmljson</artifactId>
+				<artifactId>camel-http4</artifactId>
 				<scope>provided</scope>
-			</dependency>
-	
-			<dependency>
-				<groupId>xom</groupId>
-				<artifactId>xom</artifactId>
-				<version>1.2.5</version>
-			</dependency>
-	
+			</dependency>			 
+				
 			<dependency>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-stream</artifactId>
 				<scope>provided</scope>
-			</dependency>
-	
+			</dependency>			 
+						 		
 		</dependencies>
 	
 		<build>

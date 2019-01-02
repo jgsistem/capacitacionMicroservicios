@@ -5,7 +5,8 @@
 | Name  | NO APLICA
 | Key   | NO APLICA
 | Value | http://www.dneonline.com/calculator.asmx?wsdl    
-
+          
+        http://www.dneonline.com/calculator.asmx?op=Multiply (DETALLE WEB)
 
 ### Template Parameters: 
 | Name | Vaue |

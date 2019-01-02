@@ -22,7 +22,7 @@
             <doTry id="_idDoTry_01" >
                                 
 	            <setBody> 
-	                <simple>{{ws.soap.request}}</simple>
+	                <simple>{{ws.rest.request}}</simple>
 	            </setBody> 
 	            
                 <log id="_idlog_01" message="******************** 'REQUEST' - [mock] ******************** \n  ${body}" />        
@@ -30,16 +30,20 @@
 	            <removeHeader headerName="operationName"      id="_removeHeader3" />
 	            <removeHeader headerName="operationNamespace" id="_removeHeader4" />
 	            
-	            <setHeader id="_idSetHeader_01" headerName="Content-Type" >
-	                <simple>{{ws.header.contenttype}}</simple>
-	            </setHeader>
-	
-	            <setHeader id="_idSetHeader_02" headerName="SOAPAction" > 
-	                <simple>{{ws.header.soapaction}}</simple>
-	            </setHeader> 
+                <setHeader id="_idSetHeader_01" headerName="CamelHttpMethod" >
+                    <constant>{{ws.header.httpmethod}}</constant>
+                </setHeader>
+                
+                <setHeader id="_idSetHeader_02" headerName="Content-Type" >
+                    <simple>{{ws.header.contenttype}}</simple>
+                </setHeader>
+                
+                <setHeader id="_idSetHeader_03" headerName="Authorization" >
+                    <simple>{{ws.header.authorization}}</simple>
+                </setHeader>
 	     
-	            <to id="_To_004" uri="http4://{{ws.url.endpoint}}?bridgeEndpoint=true" >
-	                <description>CONSUMIENDO 'WS-SOAP'.</description>
+	            <to id="_To_004" uri="https4://{{ws.url.endpoint}}?bridgeEndpoint=true" >
+	                <description>CONSUMIENDO 'REST/JSON'.</description>
 	            </to> 
                 
                 <log id="_idlog_02" message="******************** 'RESPONSE' - [mock] ******************** \n  ${body}" /> 

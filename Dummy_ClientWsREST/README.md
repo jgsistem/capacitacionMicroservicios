@@ -4,11 +4,9 @@
 | ------ | ------ |
 | Name  | ws-uti-to-backend-iso8583-endpoint |
 | Key   | ws.uti.to.backend.iso8583.endpoint |
-| Value | apitestenv.vnforapps.com/api.iso8583/v1/p54/ |    
+| Value | devapi.vnforapps.com/api.posservices/api/v1/service/164 |    
 
-'IMPORTANTE': EL valor es DINÁNICO solo se considera una parte del URI del BackEnd, lo demás será armado dinámicamente.
-
-
+ 
 ### Template Parameters: 
 | Name | Vaue |
 | ------ | ------ |
