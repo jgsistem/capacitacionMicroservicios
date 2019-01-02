@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+         
+        <route id="_idFlujoCamelRoute" streamCache="true" > 
+        
+            <from id="_Timer_001" uri="{{ws.timer.component}}" /> 
+             
+            <doTry id="_idDoTry_01" >
+                                
+	            <setBody> 
+	                <simple>{{ws.soap.request}}</simple>
+	            </setBody> 
+	            
+                <log id="_idlog_01" message="******************** 'REQUEST' - [mock] ******************** \n  ${body}" />        
+                
+	            <removeHeader headerName="operationName"      id="_removeHeader3" />
+	            <removeHeader headerName="operationNamespace" id="_removeHeader4" />
+	            
+	            <setHeader id="_idSetHeader_01" headerName="Content-Type" >
+	                <constant>text/xml;charset=UTF-8</constant>
+	            </setHeader>
+	
+	            <setHeader id="_idSetHeader_02" headerName="SOAPAction" > 
+	                <constant>http://tempuri.org/Multiply</constant>
+	            </setHeader> 
+	     
+	            <to id="_To_004" uri="http4://www.dneonline.com/calculator.asmx?bridgeEndpoint=true" >
+	                <description>CONSUMIENDO 'WS-SOAP'.</description>
+	            </to> 
+                
+                <log id="_idlog_02" message="******************** 'RESPONSE' - [mock] ******************** \n  ${body}" /> 
+                
+                                           
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_01" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_idlog_03" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+ 
+</beans>
+
