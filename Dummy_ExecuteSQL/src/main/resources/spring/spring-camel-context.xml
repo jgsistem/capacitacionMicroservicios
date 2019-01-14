@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+         
+        <route id="_idFlujoCamelRoute" streamCache="true" > 
+        
+            <from id="_idTimer_01" uri="{{ws.timer.component}}" />    
+             
+            <doTry id="_idDoTry_01" >
+                                
+	            <setBody id="_SetBody_001" > 
+	                <simple>{{db.sql.query.01}}</simple>
+	            </setBody>
+	   
+	            <log  id="_idLog_01" message="EJECUTANDO 'SQL'... \n ${body}" /> 	 
+	            <to  id="_idTo_01"   uri="jdbc:OracleDataSource" />  	            
+	            <log id="_idLog_02"  message="EJECUTANDO: 'split' DE COLUMNAS EN: ... \n ${body}" /> 
+	            
+	            <split id="_Split_001" >
+	                <simple>${body}</simple>
+	                
+	                <log id="_idLog_03" message="PROCESANDO COLUMNA: ${body}" />
+	                <to  id="_idTo_02"  uri="bean:MappingProcesor" /> 
+	  
+	                <log id="_idLog_04" message="_ id: [${body.id}]" />
+	                <log id="_idLog_05" message="_ telefono: [${body.telefono}]"  />
+	                <log id="_idLog_06" message="_ tecnologia: [${body.tecnologia}]" />
+	                <log id="_idLog_07" message="_ codigo: [${body.codigo}]"  />
+	                <log id="_idLog_08" message="_ paquete: [${body.paquete}]" />
+	                <log id="_idLog_09" message="_ plan: [${body.plan}]"  />
+	                <log id="_idLog_10" message="_ saldo: [${body.saldo}]" />
+                 </split> 
+ 
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_idLog_11" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+ 
+    <bean id="MappingProcesor" class="pe.com.capacitacion.processor.RowProcessor" />  
+ 
+    <bean id="OracleDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+          <property name="driverClassName" value="${db.jdbc.driverclassName}" />
+          <property name="url"             value="${db.jdbc.url}" /> 
+          <property name="username"        value="${db.jdbc.username}" /> 
+          <property name="password"        value="${db.jdbc.password}" />
+    </bean>
+ 
+</beans>
+

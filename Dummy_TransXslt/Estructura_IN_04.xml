@@ -1,0 +1,21 @@
+<PERSONA>
+	<TITULO>LENGUAJES DE PROGRAMACION</TITULO>
+	<LISTA_LENGUAJES>
+		<LENGUAJE>
+			<TIPO>JAVA</TIPO>
+			<URL>http://www.java.com</URL>
+		</LENGUAJE>
+		<LENGUAJE>
+			<TIPO>.NET</TIPO>
+			<URL>http://www.net.com</URL>
+		</LENGUAJE>
+		<LENGUAJE>
+			<TIPO>PYTHON</TIPO>
+			<URL>http://www.python.com</URL>
+		</LENGUAJE>
+		<LENGUAJE>
+			<TIPO>SQL</TIPO>
+			<URL>http://www.sql.com</URL>
+		</LENGUAJE>
+	</LISTA_LENGUAJES>
+</PERSONA> 

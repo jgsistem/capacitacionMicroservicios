@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+         
+        <route id="_idFlujoCamelRoute" streamCache="true" > 
+        
+            <from id="_idTimer_01" uri="{{ws.timer.component}}" />    
+             
+            <doTry id="_idDoTry_01" >
+            
+                <setBody id="_idBody_01" > 
+                   <simple>{{ws.body.msj}}</simple>
+                </setBody> 
+                                  
+                <log  id="_Log_01" message="REGISTRANDO 'File'... \n ${body}" />         
+                                   
+                <convertBodyTo type="java.lang.String" charset="UTF-8" />                 
+                
+                <!-- REGISTRANDO 'ARCHIVO' -->      
+                <to uri="file:{{ws.directory.msj.output}}?fileName={{ws.file.msj.output}}" />       
+                 
+                
+                <!-- LEYENDO 'ARCHIVO' -->  
+	            <setBody> 
+	                <simple>resource:classpath:json/{{ws.nombre.archivo}}</simple>
+	            </setBody>
+	            
+	            <log id="_Log_02" message="'CARGANDO': \n ${body}" />
+                 
+                                           
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_Log_02" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+ 
+</beans>
+

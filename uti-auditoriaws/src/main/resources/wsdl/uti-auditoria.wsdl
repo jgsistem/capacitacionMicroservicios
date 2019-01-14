@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<wsdl:definitions
+     name="Auditoria"
+     targetNamespace="http://visanet.com.pe/ws/soap/util/auditoria"
+     xmlns:tns="http://visanet.com.pe/ws/soap/util/auditoria"
+     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:types="http://visanet.com.pe/ws/soap/util/auditoria/types"   
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" >
+     
+    <wsdl:documentation>Version 1.0</wsdl:documentation> 
+          
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://visanet.com.pe/ws/soap/util/auditoria/types"
+				        schemaLocation="uti-auditoria.xsd" /> 
+		</xsd:schema>
+	</wsdl:types>
+      
+    
+    <!-- ELEMENTO: REQUEST (BODY) -->   
+    <wsdl:message name="RegistroAuditoriaBodyRequest" >
+        <wsdl:part name="registroAuditoriaBodyRequest" element="types:RegistroAuditoriaBodyRequest" /> 
+    </wsdl:message>
+ 
+    <!-- PORT-TYPE -->
+    <wsdl:portType name="RegistroAuditoriaPortTypeSOAP11" >
+        <wsdl:operation name="registroAuditoria" >
+            <wsdl:input  name="registroAuditoriaBodyRequest"  message="tns:RegistroAuditoriaBodyRequest" />   
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:portType name="RegistroAuditoriaPortTypeSOAP12" >
+        <wsdl:operation name="registroAuditoria" >
+            <wsdl:input  name="registroAuditoriaBodyRequest"  message="tns:RegistroAuditoriaBodyRequest" />   
+        </wsdl:operation>
+    </wsdl:portType>    
+            
+        
+    <!-- BINDING -->
+    <wsdl:binding name="RegistroAuditoriaBindingSOAP11" type="tns:RegistroAuditoriaPortTypeSOAP11" >
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" /> 
+        <wsdl:operation name="registroAuditoria" >
+            <soap:operation soapAction="http://visanet.com.pe/ws/soap/util/auditoria/registroAuditoria" />
+            <wsdl:input> 
+                <soap:body   parts="registroAuditoriaBodyRequest" use="literal" />
+            </wsdl:input> 
+        </wsdl:operation>
+    </wsdl:binding>    
+    
+    <wsdl:binding name="RegistroAuditoriaBindingSOAP12" type="tns:RegistroAuditoriaPortTypeSOAP12" >  
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" /> 
+        <wsdl:operation name="registroAuditoria" >
+            <soap12:operation soapAction="http://visanet.com.pe/ws/soap/util/auditoria/registroAuditoria" />
+            <wsdl:input> 
+                <soap12:body   parts="registroAuditoriaBodyRequest" use="literal" />
+            </wsdl:input> 
+        </wsdl:operation>
+    </wsdl:binding>      
+            
+            
+    <!-- SERVICE -->
+    <wsdl:service name="AuditoriaService" > 
+    
+        <wsdl:port name="AuditoriaPortSOAP11" binding="tns:RegistroAuditoriaBindingSOAP11" >
+            <soap:address location="http://XXX:XXX/auditoriasoap11" />
+        </wsdl:port>
+        
+        <wsdl:port name="AuditoriaPortSOAP12" binding="tns:RegistroAuditoriaBindingSOAP12" >  
+            <soap12:address location="http://XXX:XXX/auditoriasoap12" />
+        </wsdl:port>
+    </wsdl:service>
+    
+</wsdl:definitions>

@@ -17,7 +17,7 @@
          
         <route id="_idFlujoCamelRoute" streamCache="true" > 
         
-            <from id="_File_001" uri="{{ws.timer.component}}" />    
+            <from id="_File_001" uri="{{ws.file.component}}" />    
              
             <doTry id="_idDoTry_01" >
                 <log  id="_Log_001"   message="EJECUTANDO 'file'... \n ${body}" />         

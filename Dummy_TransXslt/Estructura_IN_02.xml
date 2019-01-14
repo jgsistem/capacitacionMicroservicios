@@ -1,0 +1,29 @@
+<?xml version='1.0' ?>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:dat="http://pe.com.claro/bean/estudianteWS" >
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:DatosEstudianteInput>
+         <dat:datosEstudianteRequest> 
+            <dat:transaccionBean>
+               <dat:idTransacion>EAI_001</dat:idTransacion>
+               <dat:usuarioApp>EAI</dat:usuarioApp>
+               <dat:ipApp>1.1.1.1</dat:ipApp>
+            </dat:transaccionBean>
+            <dat:estudiante>
+	            <dat:nombre>CESAR RICARDO</dat:nombre>
+	            <dat:apellido>GUERRA ARNAIZ</dat:apellido>
+	            <dat:dni>41816133</dat:dni>
+            </dat:estudiante>
+            <dat:listaLenguajes>
+				<dat:lenguaje tipo='java'   url='http://www.java.com' > </dat:lenguaje>
+				<dat:lenguaje tipo='.net'   url='http://www.net.com'  > </dat:lenguaje>
+				<dat:lenguaje tipo='python' url='http://www.python.com' > </dat:lenguaje>
+				<dat:lenguaje tipo='sql'    url='http://www.sql.com'  > </dat:lenguaje>
+            </dat:listaLenguajes>
+         </dat:datosEstudianteRequest>
+      </dat:DatosEstudianteInput>
+   </soapenv:Body>
+</soapenv:Envelope>
+

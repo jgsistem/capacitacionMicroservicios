@@ -24,7 +24,7 @@
 		             removeNamespacePrefixes="true" 
 		             expandableProperties="d e" /> 
 		</dataFormats>
-         
+ 
         <route id="_idFlujoCamelRoute" > 
  
             <from id="_Timer_001" uri="{{ws.input.component}}" /> 

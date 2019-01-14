@@ -15,11 +15,11 @@
     
     <!-- 'Conexion EJB3' -->                            
     <p:properties id="_idJNDIProperties" > 
-        <prop key="java.naming.factory.initial" >weblogic.jndi.WLInitialContextFactory</prop>
-        <prop key="java.naming.provider.url" >t3://localhost:7001</prop>
+        <prop key="java.naming.factory.initial" >${ejb3.conexion.context}</prop>
+        <prop key="java.naming.provider.url" >${ejb3.conexion.url}</prop>
          
-        <prop key="remote.connection.default.username" >weblogic</prop>
-        <prop key="remote.connection.default.password" >12345678</prop>        
+        <prop key="remote.connection.default.username" >${ejb3.conexion.username}</prop>
+        <prop key="remote.connection.default.password" >${ejb3.conexion.password}</prop>        
     </p:properties>
 
     

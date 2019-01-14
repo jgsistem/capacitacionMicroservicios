@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" 
+                  streamCache="true" 
+                  xmlns="http://camel.apache.org/schema/spring" 				    
+				  xmlns:par1="http://visanet.com.pe/obj/PartyExt" 
+				  xmlns:par2="http://visanet.com.pe/obj/Party" 
+				  xmlns:blac="http://visanet.com.pe/ws/oper/ent/BlacklistInqOper" 
+				  xmlns:par="http://visanet.com.pe/msg/PartyInqRq" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+         
+        <route id="_idFlujoCamelRoute" streamCache="true" > 
+        
+            <from id="_idQueue_01" uri="{{ws.queue.component}}" /> 
+             
+            <doTry id="_idDoTry_01" >
+                <log  id="_Log_01" message="EJECUTANDO 'Queue'... \n ${body}" />   
+             
+                <setProperty propertyName="vNombre" >
+                   <xpath>{{ws.cadena.xpath.msj}}</xpath>
+                </setProperty> 
+                 
+                <log  id="_Log_02" message="NOMBRE: \n [${property.vNombre}]" />   
+                                           
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_Log_03" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+ 
+    <!-- configure the camel activemq component to use the current broker -->
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent" >
+        <property name="connectionFactory">
+          <bean class="org.apache.activemq.ActiveMQConnectionFactory" >
+            <property name="brokerURL" value="${spring.activemq.broker-url}" />
+            <property name="userName"  value="${spring.activemq.user}" />
+            <property name="password"  value="${spring.activemq.password}" />
+          </bean>
+        </property>
+    </bean>
+ 
+</beans>
+

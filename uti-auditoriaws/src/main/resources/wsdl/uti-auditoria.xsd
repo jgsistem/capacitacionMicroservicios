@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+ 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	          xmlns:tns="http://visanet.com.pe/ws/soap/util/auditoria/types"
+	          targetNamespace="http://visanet.com.pe/ws/soap/util/auditoria/types"
+	          elementFormDefault="qualified" >
+ 
+    <xsd:element name="RegistroAuditoriaBodyRequest" > 
+		<xsd:complexType>
+			 <xsd:sequence>  
+                  <xsd:element name="listAudit" type="tns:recordAudit" minOccurs="1" maxOccurs="unbounded" />   
+			 </xsd:sequence>
+		</xsd:complexType>
+       </xsd:element>
+ 
+    <xsd:complexType name="recordAudit" > 
+	    <xsd:sequence>
+            <xsd:element type="xsd:string"   name="idTransaccion"    maxOccurs="1" minOccurs="1" />
+            <xsd:element type="xsd:string"   name="serviceName"      maxOccurs="1" minOccurs="1" />
+            <xsd:element type="xsd:string"   name="serviceOperation" maxOccurs="1" minOccurs="1" />	
+            <xsd:element type="xsd:string"   name="messageType"      maxOccurs="1" minOccurs="1" />   
+            <xsd:element type="xsd:string"   name="taxonomicLayer"   maxOccurs="1" minOccurs="1" />         
+            <xsd:element type="xsd:dateTime" name="date"             maxOccurs="1" minOccurs="1" />
+          
+            <xsd:element type="xsd:anyType"  name="header"           maxOccurs="1" minOccurs="0" /> 
+            <xsd:element type="xsd:anyType"  name="body"             maxOccurs="1" minOccurs="0" /> 
+            <xsd:element type="xsd:anyType"  name="fault"            maxOccurs="1" minOccurs="0" /> 
+            <xsd:element type="xsd:anyType"  name="aux"              maxOccurs="1" minOccurs="0" /> 
+            <xsd:element type="xsd:int"      name="numMonth"         maxOccurs="1" minOccurs="1" />
+	    </xsd:sequence>
+    </xsd:complexType>
+ 
+</xsd:schema>
+

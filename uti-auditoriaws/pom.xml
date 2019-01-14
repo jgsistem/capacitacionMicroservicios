@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>pe.com.capacitacion</groupId>
+		<artifactId>uti-auditoriaws</artifactId>
+		<version>1.0.0</version>
+		<name>uti-auditoriaws</name>
+		<description>uti-auditoriaws</description>
+	
+		<properties>
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+			<java.version>1.8</java.version>
+			
+			<spring.boot-version>1.5.4.RELEASE</spring.boot-version>
+			<fabric8.version>2.2.170</fabric8.version>
+			<xom.version>1.2.5</xom.version> 
+			
+		</properties>
+	
+		<parent>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>1.5.4.RELEASE</version>
+		</parent>
+	
+		<dependencyManagement>
+			<dependencies>
+				<dependency>
+					<groupId>io.fabric8</groupId>
+					<artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
+					<version>${fabric8.version}</version>
+					<type>pom</type>
+					<scope>import</scope>
+				</dependency>
+			</dependencies>
+		</dependencyManagement>
+		
+		
+		<dependencies>
+		
+	        <!-- SPRING FRAMEWORK --> 
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter</artifactId>
+				<scope>provided</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<scope>provided</scope>
+			</dependency>
+						
+ 
+			<!-- APACHE CAMEL --> 
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-spring-boot-starter</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-cxf</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-dozer-starter</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-http4</artifactId>
+				<scope>provided</scope>
+			</dependency>
+ 
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-xmljson</artifactId>
+				<scope>provided</scope>
+			</dependency>			
+		 
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-script</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-stream</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jsonpath</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-spring-boot</artifactId>
+				<scope>provided</scope>
+			</dependency>
+				
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jms</artifactId>
+				<scope>provided</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-camel</artifactId>
+				<scope>provided</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-broker</artifactId>
+				<scope>provided</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-client</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-pool</artifactId>
+				<scope>provided</scope>
+			</dependency>
+			 
+			
+			<!-- OTROS --> 	
+			<dependency>
+				<groupId>xom</groupId>
+				<artifactId>xom</artifactId>
+				<version>${xom.version}</version>
+				<scope>provided</scope>
+			</dependency>
+	 		 		
+			<dependency>
+			    <groupId>org.apache.camel</groupId>
+			    <artifactId>camel-saxon</artifactId>
+			    <scope>provided</scope>
+			</dependency>	
+ 
+			<dependency>
+			   <groupId>org.apache.camel</groupId>
+			   <artifactId>camel-spring-boot</artifactId>
+			   <scope>provided</scope>
+			</dependency>
+	
+			
+		</dependencies>
+ 		
+ 		
+		<build>
+			<plugins>
+	
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+	
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+	
+			</plugins>
+		</build>
+		
+	</project>
+	
+	

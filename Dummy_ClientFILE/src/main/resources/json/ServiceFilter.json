@@ -1,0 +1,83 @@
+{
+	"auditoriaServiceFilter":{
+		"service":[
+			{
+				"identificador": "bss-validateaffiliationmanagement.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-blacklistinq.BBB",
+				"estado": "false"
+			},
+			{
+				"identificador": "ent-cccinq.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-datarucinq.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-datarucrlinq.BBB",
+				"estado": "false"
+			},
+			{
+				"identificador": "ent-feeinstallationpmtposadd.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-moneylaunderinginq.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-parametergesintelinq.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-partyinfoadd.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-partyinfoinq.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "ent-trxinfoaddoper.BBB",
+				"estado": "true"
+			},		
+			{
+				"identificador": "uti-consultalistanegra.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "uti-consultamcci.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "uti-consultaparametrogesintel.BBB",
+				"estado": "false"
+			},
+			{
+				"identificador": "uti-consultarepresentante.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "uti-datosrucwsfacaderemoteservice.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "uti-interfacesweb.BBB",
+				"estado": "true"
+			},
+			{
+				"identificador": "uti-registrotransaccion.BBB",
+				"estado": "false"
+			},
+			{
+				"identificador": "uti-validacioncuentabancaria.BBB",
+				"estado": "true"
+			}
+		]
+	}
+}
+

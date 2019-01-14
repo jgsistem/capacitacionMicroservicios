@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd         
+                           http://camel.apache.org/schema/spring 
+                           http://camel.apache.org/schema/spring/camel-spring.xsd          
+                           http://camel.apache.org/schema/cxf 
+                           http://camel.apache.org/schema/cxf/camel-cxf.xsd" >  
+    
+    <camelContext id="_idFlujoCamelContext" streamCache="true" xmlns="http://camel.apache.org/schema/spring" >
+    
+        <propertyPlaceholder id="_idPlaceholder" location="classpath:application.properties" />
+         
+        <route id="_idFlujoCamelRoute" streamCache="true" > 
+        
+            <from id="_idTimer_01" uri="{{ws.timer.component}}" />    
+   
+            <doTry id="_idDoTry_01" >
+                <multicast id="_idMulticast_01" parallelProcessing="true" > 
+                    
+                    <!-- PIPELINE #1 -->
+	                <pipeline id="_idPipeline_01A" > 
+			           <log  id="_idLog_01A" message="EJECUTANDO 'PIPELINE #1' ..., [INICIO]" /> 	
+			            
+					   <delay id="_idDelay_01A" asyncDelayed="true" >
+					       <simple>{{ws.timer.delay.01}}</simple>
+					   </delay> 
+					   
+					   <log  id="_idLog_02A" message="EJECUTANDO 'PIPELINE #1' ..., [FIN]" /> 		    
+	                </pipeline>
+	               
+	                <!-- PIPELINE #2 -->  
+	                <pipeline id="_idPipeline_01B" >
+			           <log  id="_idLog_01B" message="EJECUTANDO 'PIPELINE #2' ..., [INICIO]" /> 
+			            
+					   <delay id="_idDelay_01B" asyncDelayed="true" >
+					       <simple>{{ws.timer.delay.02}}</simple>
+					   </delay>
+					   
+					   <log  id="_idLog_02B" message="EJECUTANDO 'PIPELINE #2' ..., [FIN]" /> 	 
+	                </pipeline> 
+                 
+                </multicast>
+                 
+                <doCatch id="_idDoCatch_01" >
+                    <exception>java.lang.Exception</exception>  
+                    
+                    <handled>
+                       <constant>true</constant>
+                    </handled>
+                    
+                    <setBody id="_idSetBody_02" >  
+                        <simple>${exception.getResponseBody}</simple>
+                    </setBody>
+                    
+                    <log id="_idLog_02" message="Exception: \n ${body}" />    
+                </doCatch>
+            </doTry>
+            
+        </route>
+        
+    </camelContext>
+ 
+</beans>
+
