@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<wsdl:definitions
+     name="VISANETplantillaSOAP"
+     targetNamespace="http://visanet.com.pe/soap/ventas/generatesolicitude/ws"
+     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://visanet.com.pe/soap/ventas/generatesolicitude/ws"
+     xmlns:types="http://visanet.com.pe/soap/ventas/generatesolicitude/ws/types"
+     xmlns:fault="http://visanet.com.pe/soap/generic/visanetFault/ws/types"     
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" >
+     
+    <wsdl:documentation>Version 1.0</wsdl:documentation> 
+          
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://visanet.com.pe/soap/ventas/generatesolicitude/ws/types"
+				        schemaLocation="VISANETplantillaSOAP.xsd" />
+				        
+			<xsd:import namespace="http://visanet.com.pe/soap/generic/visanetFault/ws/types"
+				        schemaLocation="VISANETFault.xsd" /> 
+		</xsd:schema>
+	</wsdl:types>
+    
+    
+    <!-- ELEMENTO: REQUEST (HEADER-BODY) -->
+    <wsdl:message name="BaseMessageRequest" >
+        <wsdl:part name="generatesolicitudeBaseHeaderRequest"  element="types:BaseHeaderRequest" /> 
+        <wsdl:part name="generatesolicitudeBaseBodyRequest"    element="types:BaseBodyRequest"   /> 
+    </wsdl:message>
+    
+    <!-- ELEMENTO: RESPONSE (HEADER-BODY) -->
+    <wsdl:message name="BaseMessageResponse" >
+        <wsdl:part name="generatesolicitudeBaseHeaderResponse"  element="types:BaseHeaderResponse" />
+        <wsdl:part name="generatesolicitudeBaseBodyResponse"    element="types:BaseBodyResponse"   />  
+    </wsdl:message> 
+ 
+    <!-- ELEMENTO: 'FAULT' -->
+    <wsdl:message name="BaseMessageFault" >
+        <wsdl:part name="generatesolicitudeBaseFault" element="fault:BaseFault" />
+    </wsdl:message>
+    
+        
+    <!-- PORT-TYPE -->
+    <wsdl:portType name="generatesolicitudePortTypeSOAP11" >
+        <wsdl:operation name="createSolicitude" >
+            <wsdl:input  name="generatesolicitudeMessageRequest"  message="tns:BaseMessageRequest"  /> 
+            <wsdl:output name="generatesolicitudeMessageResponse" message="tns:BaseMessageResponse" /> 
+            <wsdl:fault  name="generatesolicitudeMessageFault"    message="tns:BaseMessageFault"    /> 
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:portType name="generatesolicitudePortTypeSOAP12" >
+        <wsdl:operation name="createSolicitude" >
+            <wsdl:input  name="generatesolicitudeMessageRequest"  message="tns:BaseMessageRequest"  /> 
+            <wsdl:output name="generatesolicitudeMessageResponse" message="tns:BaseMessageResponse" /> 
+            <wsdl:fault  name="generatesolicitudeMessageFault"    message="tns:BaseMessageFault"    />  
+        </wsdl:operation>
+    </wsdl:portType>    
+            
+        
+    <!-- BINDING -->
+    <wsdl:binding name="generatesolicitudeBindingSOAP11" type="tns:generatesolicitudePortTypeSOAP11" >
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" /> 
+        <wsdl:operation name="createSolicitude" >
+            <soap:operation soapAction="http://visanet.com.pe/soap/ventas/generatesolicitude/ws/createSolicitude" />
+            <wsdl:input>
+                <soap:header message="tns:BaseMessageRequest" part="generatesolicitudeBaseHeaderRequest" use="literal" /> 
+                <soap:body   parts="generatesolicitudeBaseBodyRequest" use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="tns:BaseMessageResponse" part="generatesolicitudeBaseHeaderResponse" use="literal" />
+                <soap:body   parts="generatesolicitudeBaseBodyResponse" use="literal" />
+            </wsdl:output>
+            <wsdl:fault      name="generatesolicitudeMessageFault" >
+                <soap:fault  name="generatesolicitudeMessageFault" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>    
+    
+    <wsdl:binding name="generatesolicitudeBindingSOAP12" type="tns:generatesolicitudePortTypeSOAP12" > 
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" /> 
+        <wsdl:operation name="createSolicitude" >
+            <soap12:operation soapAction="http://visanet.com.pe/soap/ventas/generatesolicitude/ws/createSolicitude" />
+            <wsdl:input>
+                <soap12:header message="tns:BaseMessageRequest" part="generatesolicitudeBaseHeaderRequest" use="literal" /> 
+                <soap12:body   parts="generatesolicitudeBaseBodyRequest" use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:header message="tns:BaseMessageResponse" part="generatesolicitudeBaseHeaderResponse" use="literal" /> 
+                <soap12:body   parts="generatesolicitudeBaseBodyResponse" use="literal" />
+            </wsdl:output>
+            <wsdl:fault        name="generatesolicitudeMessageFault" >
+                <soap12:fault  name="generatesolicitudeMessageFault" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>      
+            
+            
+    <!-- SERVICE -->
+    <wsdl:service name="generatesolicitudeService" > 
+    
+        <wsdl:port name="generatesolicitudePortSOAP11" binding="tns:generatesolicitudeBindingSOAP11" >
+            <soap:address location="http://XXX:XXX/SOAP11" />
+        </wsdl:port>
+        
+        <wsdl:port name="generatesolicitudePortSOAP12" binding="tns:generatesolicitudeBindingSOAP12" > 
+            <soap12:address location="http://XXX:XXX/SOAP12" />
+        </wsdl:port>
+    </wsdl:service>
+    
+</wsdl:definitions>

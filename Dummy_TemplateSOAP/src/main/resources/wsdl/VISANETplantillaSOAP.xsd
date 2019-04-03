@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns="http://visanet.com.pe/soap/ventas/generatesolicitude/ws/types"
+	        xmlns:audit="http://visanet.com.pe/soap/generic/visanetAudit/ws/types"
+	        targetNamespace="http://visanet.com.pe/soap/ventas/generatesolicitude/ws/types"
+	        elementFormDefault="qualified" >
+	      
+	        <xsd:import namespace="http://visanet.com.pe/soap/generic/visanetAudit/ws/types" 
+	                    schemaLocation="./VISANETAudit.xsd" />
+ 
+		    <!--******************* COMPLEXTYPE: 'HEADER' *******************-->	 
+		    <xsd:element name="BaseHeaderRequest" >
+				<xsd:complexType >
+					<xsd:sequence>  
+					     <!-- LOS DATOS DEL 'HEADER' [REQUEST], SE INGRESAN AQUI -->                        
+		                 <xsd:element name="auditoriaRequest" type="audit:AuditRequestType" /> 
+					</xsd:sequence>
+				</xsd:complexType>
+	        </xsd:element>
+	        
+	        <xsd:element name="BaseHeaderResponse" >
+				<xsd:complexType>
+					<xsd:sequence>
+					     <!-- LOS DATOS DEL 'HEADER' [RESPONSE], SE INGRESAN AQUI --> 
+						 <xsd:element name="auditoriaResponse" type="audit:AuditResponseType" />  
+					</xsd:sequence>
+				</xsd:complexType>
+		    </xsd:element>
+	   
+		
+		    <!--******************* COMPLEXTYPE: 'BODY' *******************-->
+		    <xsd:element name="BaseBodyRequest" >
+				<xsd:complexType>
+					<xsd:sequence> 
+		                 <!-- LOS DATOS DEL 'BODY' [REQUEST], SE INGRESAN AQUI -->    
+		                 <xsd:element name="name"      type="xsd:string" /> 
+		                 <xsd:element name="lastName"  type="xsd:string" />
+		                 <xsd:element name="telephone" type="xsd:string" />	
+		                 <xsd:element name="dni"       type="xsd:string" />	  
+					</xsd:sequence>
+				</xsd:complexType>
+	        </xsd:element>
+	        
+	        <xsd:element name="BaseBodyResponse" > 
+				<xsd:complexType >
+					<xsd:sequence>
+						 <!-- LOS DATOS DEL 'BODY' [RESPONSE], SE INGRESAN AQUI -->  
+					     <xsd:element name="state" type="xsd:string" /> 
+					     <xsd:element name="date"  type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+            </xsd:element> 
+</xsd:schema>
+
