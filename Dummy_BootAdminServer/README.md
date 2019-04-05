@@ -38,5 +38,10 @@
  http://localhost:8093/trace
  http://localhost:8093/env
  http://localhost:8093/loggers
-
+ 
+ 
+ http://dummybootadminserver-myproject.192.168.99.100.nip.io/#/
+ 
+ 
+ 
 

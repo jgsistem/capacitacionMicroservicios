@@ -1,6 +1,0 @@
-
- 
- http://localhost:8080/ws/Dummy_TemplateSOAP11?wsdl
- http://localhost:8080/ws/Dummy_TemplateSOAP12?wsdl
- 
- 

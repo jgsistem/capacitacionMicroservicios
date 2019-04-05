@@ -1,7 +1,0 @@
- 
- URL: 
- ---
- http://localhost:7070/ws/soap/uti/auditoriasoap11?wsdl
- http://localhost:7070/ws/soap/uti/auditoriasoap12?wsdl
-
- 
