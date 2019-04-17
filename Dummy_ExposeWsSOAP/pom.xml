@@ -42,7 +42,7 @@
 		
 		<dependencies>
 		
-	        <!-- SPRING FRAMEWORK xxx --> 
+	        <!-- SPRING FRAMEWORK xxx11 --> 
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter</artifactId>
