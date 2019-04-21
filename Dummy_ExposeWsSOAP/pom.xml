@@ -27,6 +27,22 @@
 			<version>1.5.4.RELEASE</version>
 		</parent>
 	
+       <distributionManagement>   
+           <repository>      
+              <id>releases</id>
+              <name>releases</name>   
+              <url>http://localhost:8081/repository/Repositorio_TallerMicroservicios_releases/</url>
+           </repository>
+        
+           <snapshotRepository>
+              <id>napshots</id>
+              <name>napshots</name>
+              <url>http://localhost:8081/repository/Repositorio_TallerMicroservicios_snapshots/</url>
+           </snapshotRepository>
+        </distributionManagement>
+
+	
+	
 		<dependencyManagement>
 			<dependencies>
 				<dependency>
