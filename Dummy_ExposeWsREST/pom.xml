@@ -27,6 +27,22 @@
 			<version>1.5.4.RELEASE</version>
 		</parent>
 	
+	
+		<distributionManagement>
+		   <repository>
+		      <id>deployment</id>
+		      <name>Repositorio_TallerMicroservicios_releases</name>
+		      <url>http://127.0.0.1:8081/repository/Repositorio_TallerMicroservicios_releases/</url>
+		   </repository>
+	
+		   <snapshotRepository>
+		      <id>deployment</id>
+		      <name>Repositorio_TallerMicroservicios_snapshots</name>
+		      <url>http://127.0.0.1:8081/repository/Repositorio_TallerMicroservicios_snapshots/</url>
+		   </snapshotRepository>
+		</distributionManagement>
+	
+	
 		<dependencyManagement>
 			<dependencies>
 				<dependency>
