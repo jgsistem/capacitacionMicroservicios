@@ -16,7 +16,7 @@
 			<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 			<java.version>1.8</java.version>
 			
-			<spring.boot-version>1.5.4.RELEASE</spring.boot-version>
+			<spring.boot-version>1.5.5.RELEASE</spring.boot-version>
 			<fabric8.version>2.2.170</fabric8.version>
 			<xom.version>1.2.5</xom.version>
 		</properties>
