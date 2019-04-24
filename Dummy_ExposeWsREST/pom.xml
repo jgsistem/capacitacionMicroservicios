@@ -27,21 +27,21 @@
 			<version>1.5.4.RELEASE</version>
 		</parent>
 	
-	
-		<distributionManagement>
-		   <repository>
-		      <id>deployment</id>
-		      <name>Repositorio_TallerMicroservicios_releases</name>
-		      <url>http://127.0.0.1:8081/repository/Repositorio_TallerMicroservicios_releases/</url>
-		   </repository>
-	
-		   <snapshotRepository>
-		      <id>deployment</id>
-		      <name>Repositorio_TallerMicroservicios_snapshots</name>
-		      <url>http://127.0.0.1:8081/repository/Repositorio_TallerMicroservicios_snapshots/</url>
-		   </snapshotRepository>
-		</distributionManagement>
-	
+                <!-- ACCESO 'REPOSITORIO CENTRAL' - [NEXUS] 
+	 	<repositories>
+		    <repository>
+		      <id>repoCentral_TallerMicroservicios</id>
+		      <name>Repositorio CENTRAL proporcionado por NEXUS 2</name>
+		      <url>http://localhost:8081/nexus/content/repositories/Repositorio_TallerMicroservicios_releases/</url> 
+		      <releases>
+		        <enabled>true</enabled>
+		      </releases>
+		      <snapshots>
+		        <enabled>false</enabled>
+		      </snapshots>
+		    </repository>
+		</repositories>
+	        -->
 	
 		<dependencyManagement>
 			<dependencies>
@@ -139,6 +139,7 @@
 					<artifactId>spring-boot-maven-plugin</artifactId>
 				</plugin>
 	
+	            <!-- 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -147,6 +148,7 @@
 						<target>${java.version}</target>
 					</configuration>
 				</plugin>
+	             -->
 	
 			</plugins>
 		</build>
